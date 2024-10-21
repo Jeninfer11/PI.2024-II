@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path/path.dart';
+import 'package:shopy_file_gp2/src/presentation/pages/client/reserva/ReservaPage.dart';
 import 'package:shopy_file_gp2/src/presentation/pages/client/reserva/bloc/ReservaEvent.dart';
 import 'package:shopy_file_gp2/src/presentation/pages/client/servicio/bloc/ServicioBloc.dart';
 import 'package:shopy_file_gp2/src/presentation/pages/client/servicio/bloc/ServicioEvent.dart';
@@ -57,7 +58,7 @@ class ServicioContent extends StatelessWidget {
                         .center, // Centrar los hijos horizontalmente
                     children: [
                       const Text(
-                        'SOLICITAR SERVICIO',
+                        ' DESAYUNO',
                         style: TextStyle(
                           color: Color.fromARGB(244, 109, 53, 53),
                           fontSize: 20,
@@ -65,12 +66,19 @@ class ServicioContent extends StatelessWidget {
                         ),
                         textAlign: TextAlign.center, // Centrando el texto
                       ),
-                      _DropdownTipoServicio(),
-                      _TextFieldHora(context),
-                      _DropdownLugarVisita(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        child: Image.asset(
+                          'assets/img/desayuno.jpg',
+                          width: 250, // Ajusta el tamaño de la imagen
+                          height: 150,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                       _numeroPersona(context),
                       _TextFieldFechaInicio(context),
                       _TextFieldFechaFin(context),
+                      _TextFieldDiaServicio(context),
                       _buttonConfirmarServicio(context),
                     ],
                   ),
@@ -83,143 +91,17 @@ class ServicioContent extends StatelessWidget {
     );
   }
 
+  List<Map<String, dynamic>> services = [
+    {
+      'name': 'TOURS',
+      'image': 'assets/img/laguna.jpg',
+    },
+  ];
   Widget _imageBackground(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       color: const Color.fromARGB(255, 241, 200, 113),
-    );
-  }
-
-  Widget _DropdownTipoServicio() {
-    String? _selectedServicio = state.tipo_servicio.value.isNotEmpty
-        ? state.tipo_servicio.value
-        : 'Tours'; // Valor inicial
-
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10.0),
-      child: DropdownButtonFormField<String>(
-        decoration: const InputDecoration(
-          labelText: 'Tipo de Servicio',
-          labelStyle: TextStyle(color: Colors.white, fontSize: 16),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white, width: 2.0),
-          ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white, width: 2.0),
-          ),
-        ),
-        dropdownColor: Colors.orange,
-        value: _selectedServicio,
-        icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
-        items: [ 'Tours', 'Transporte']
-            .map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value, style: const TextStyle(color: Colors.white)),
-          );
-        }).toList(),
-        onChanged: (newValue) {
-          _selectedServicio = newValue;
-          bloc?.add(Tipo_ServicioChanged(
-              tipo_servicio: BlocFormItem(value: newValue ?? 'Desayuno')));
-        },
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Seleccione un tipo de servicio';
-          }
-          return state.tipo_servicio.error;
-        },
-      ),
-    );
-  }
-
-  Widget _TextFieldHora(BuildContext context) {
-    final TextEditingController _timeController = TextEditingController(
-      text: state.hora.value,
-    );
-
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10.0),
-      child: TextFormField(
-        controller: _timeController,
-        decoration: const InputDecoration(
-          labelText: 'Hora',
-          icon: Icon(Icons.access_time, color: Colors.white),
-          labelStyle: TextStyle(color: Colors.white, fontSize: 16),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white, width: 2.0),
-          ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white, width: 2.0),
-          ),
-        ),
-        style: const TextStyle(color: Colors.white, fontSize: 16),
-        readOnly: true,
-        onTap: () async {
-          TimeOfDay? pickedTime = await showTimePicker(
-            context: context,
-            initialTime: TimeOfDay.now(),
-            builder: (BuildContext context, Widget? child) {
-              return Theme(
-                data: Theme.of(context).copyWith(
-                  primaryColor: Colors.orange,
-                ),
-                child: child!,
-              );
-            },
-          );
-
-          if (pickedTime != null) {
-            String formattedTime = pickedTime.format(context);
-            _timeController.text = formattedTime;
-            bloc?.add(HoraChanged(hora: BlocFormItem(value: formattedTime)));
-          }
-        },
-      ),
-    );
-  }
-
-  Widget _DropdownLugarVisita() {
-    String? _selectedLugar = state.lugarVisita.value.isNotEmpty
-        ? state.lugarVisita.value
-        : 'Lamas'; // Valor inicial
-
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10.0),
-      child: DropdownButtonFormField<String>(
-        decoration: const InputDecoration(
-          labelText: 'Lugar de Visita',
-          labelStyle: TextStyle(color: Colors.white, fontSize: 16),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white, width: 2.0),
-          ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white, width: 2.0),
-          ),
-        ),
-        dropdownColor: Colors.orange,
-        value: _selectedLugar,
-        icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
-        items: ['Lamas', 'Laguna azul', 'mirador tarapoto']
-            .map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value, style: const TextStyle(color: Colors.white)),
-          );
-        }).toList(),
-        onChanged: (newValue) {
-          _selectedLugar = newValue;
-          bloc?.add(LugarVisitaChanged(
-              lugarVisita: BlocFormItem(value: newValue ?? 'Lamas')));
-        },
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Seleccione un lugar de visita';
-          }
-          return state.lugarVisita.error;
-        },
-      ),
     );
   }
 
@@ -285,6 +167,47 @@ class ServicioContent extends StatelessWidget {
             },
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _TextFieldDiaServicio(BuildContext context) {
+    final TextEditingController _dateController = TextEditingController(
+      text: state.fechaInicio.value,
+    );
+
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
+      child: TextFormField(
+        controller: _dateController,
+        decoration: const InputDecoration(
+          labelText: 'Fecha dia de servicio',
+          icon: Icon(Icons.date_range, color: Colors.white),
+          labelStyle: TextStyle(color: Colors.white, fontSize: 16),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white, width: 2.0),
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white, width: 2.0),
+          ),
+        ),
+        readOnly: true,
+        onTap: () async {
+          DateTime? pickedDate = await showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2000),
+            lastDate: DateTime(2101),
+          );
+
+          if (pickedDate != null) {
+            String formattedDate =
+                "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+            _dateController.text = formattedDate;
+            bloc?.add(FechaInicioChanged(
+                fechaInicio: BlocFormItem(value: formattedDate)));
+          }
+        },
       ),
     );
   }
@@ -407,6 +330,12 @@ class ServicioContent extends StatelessWidget {
         onPressed: () {
           if (state.formKey!.currentState!.validate()) {
             bloc?.add(ServicioSubmit());
+
+            // Redirigir a ReservaPage
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ReservaPage()),
+            );
           } else {
             Fluttertoast.showToast(
               msg: 'Servicio no confirmado',

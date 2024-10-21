@@ -21,3 +21,7 @@ class ClientLogout extends ClientHomeEvent {
 class Reserva extends ClientHomeEvent {
   const Reserva();
 }
+
+class Servicio extends ClientHomeEvent {
+  const Servicio();
+}

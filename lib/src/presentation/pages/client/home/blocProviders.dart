@@ -8,6 +8,8 @@ import 'package:shopy_file_gp2/src/presentation/pages/auth/register/bloc/Registe
 import 'package:shopy_file_gp2/src/presentation/pages/client/home/bloc/ClientHomeBloc.dart';
 import 'package:shopy_file_gp2/src/presentation/pages/client/reserva/bloc/ReservaBloc.dart';
 import 'package:shopy_file_gp2/src/presentation/pages/client/reserva/bloc/ReservaEvent.dart';
+import 'package:shopy_file_gp2/src/presentation/pages/client/servicio/bloc/ServicioBloc.dart';
+import 'package:shopy_file_gp2/src/presentation/pages/client/servicio/bloc/ServicioEvent.dart';
 
 List<BlocProvider> blocProviders = [
   BlocProvider<RegisterBloc>(
@@ -19,6 +21,9 @@ List<BlocProvider> blocProviders = [
   BlocProvider<ReservaBloc>(
       create: (context) =>
           ReservaBloc(locator<AuthUseCases>())..add(InitEventReserva())),
+  BlocProvider<ServicioBloc>(
+      create: (context) =>
+          ServicioBloc(locator<AuthUseCases>())..add(InitEventServicio())),
   BlocProvider<ClientHomeBloc>(
       create: (context) => ClientHomeBloc(locator<AuthUseCases>())),
 ];

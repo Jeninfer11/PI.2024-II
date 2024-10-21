@@ -41,7 +41,6 @@ class ReservaBloc extends Bloc<ReservaEvent, ReservaState> {
     on<fechaInicioChanged>(_onfechaInicioChanged);
     on<fechaFinChanged>(_onfechaFinChanged);
     on<fechaReservaChanged>(_onfechaReservaChanged);
-    on<fechaReservaChanged>(_onfechaReservaChanged);
     on<ReservaAdded>(
         _onReservaAdded); // Maneja el evento de agregar una reserva
   }

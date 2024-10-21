@@ -4,6 +4,7 @@ import 'package:shopy_file_gp2/src/domain/useCases/auth/LoginUseCase.dart';
 import 'package:shopy_file_gp2/src/domain/useCases/auth/LogoutUseCase.dart';
 import 'package:shopy_file_gp2/src/domain/useCases/auth/RegisterUseCase.dart';
 import 'package:shopy_file_gp2/src/domain/useCases/reserva/ReservaUseCase.dart';
+import 'package:shopy_file_gp2/src/domain/useCases/servicio/ServicioUseCase.dart';
 
 class AuthUseCases {
   LoginUseCase login;
@@ -12,6 +13,7 @@ class AuthUseCases {
   SaveUserSessionUseCase saveUserSession;
   LogoutUseCase logout;
   ReservaUseCase reserva;
+  ServicioUseCase servicio;
 
   AuthUseCases({
     required this.login,
@@ -20,5 +22,6 @@ class AuthUseCases {
     required this.saveUserSession,
     required this.logout,
     required this.reserva,
+    required this.servicio,
   });
 }

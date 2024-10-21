@@ -5,6 +5,7 @@ import 'package:shopy_file_gp2/src/presentation/pages/auth/register/bloc/Registe
 import 'package:shopy_file_gp2/src/presentation/pages/client/home/blocProviders.dart';
 import 'package:shopy_file_gp2/src/presentation/pages/client/home/ClientHomePage.dart';
 import 'package:shopy_file_gp2/src/presentation/pages/client/reserva/ReservaPage.dart';
+import 'package:shopy_file_gp2/src/presentation/pages/client/servicio/bloc/ServicioPage.dart';
 import 'package:shopy_file_gp2/src/presentation/pages/client/sobreNosotros/sobreNosotros.dart';
 
 void main() async {
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
             'client/home': (BuildContext context) => ClientHomePage(),
             'client/reserva': (BuildContext context) => ReservaPage(),
             'home/sobrenosotros': (BuildContext context) => Sobrenosotros(),
+            'home/servicio': (BuildContext context) => ServicioPage(),
           },
         ));
   }

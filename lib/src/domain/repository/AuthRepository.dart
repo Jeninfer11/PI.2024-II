@@ -10,4 +10,5 @@ abstract class AuthRepository {
   Future<Resource<AuthResponse>> login(String email, String password);
   Future<Resource<AuthResponse>> register(User User);
   Future<Resource<AuthResponse>> reserva(Reserva reserva);
+  Future<Resource<AuthResponse>> servicio(Servicio servicio);
 }

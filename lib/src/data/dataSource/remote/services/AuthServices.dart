@@ -72,4 +72,25 @@ class AuthServices {
       return Error(e.toString());
     }
   }
+
+  Future<Resource<AuthResponse>> servicio(Servicio servicio) async {
+    try {
+      Uri url = Uri.http(ApiConfig.API_ECOMMERCE, '/client/servicio');
+      Map<String, String> headers = {"Content-Type": "application/json"};
+      String body = json.encode(servicio);
+
+      final response = await http.post(url, headers: headers, body: body);
+      final data = json.decode(response.body);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        AuthResponse authResponse = AuthResponse.fromJson(data);
+        return Success(authResponse);
+      } else {
+        return Error(data['message']);
+      }
+    } catch (e) {
+      print('Error $e');
+      return Error(e.toString());
+    }
+  }
 }

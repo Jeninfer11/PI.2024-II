@@ -10,6 +10,7 @@ import 'package:shopy_file_gp2/src/domain/useCases/auth/LoginUseCase.dart';
 import 'package:shopy_file_gp2/src/domain/useCases/auth/LogoutUseCase.dart';
 import 'package:shopy_file_gp2/src/domain/useCases/auth/RegisterUseCase.dart';
 import 'package:shopy_file_gp2/src/domain/useCases/reserva/ReservaUseCase.dart';
+import 'package:shopy_file_gp2/src/domain/useCases/servicio/ServicioUseCase.dart';
 
 @module
 abstract class AppModule {
@@ -33,7 +34,6 @@ abstract class AppModule {
         saveUserSession: SaveUserSessionUseCase(authRepository),
         logout: LogoutUseCase(authRepository),
         reserva: ReservaUseCase(authRepository),
+        servicio: ServicioUseCase(authRepository),
       );
 }
-
-

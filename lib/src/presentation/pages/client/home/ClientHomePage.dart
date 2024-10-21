@@ -85,31 +85,32 @@ class _ClientHomePageState extends State<ClientHomePage> {
   // Lista de productos simulada
   List<Map<String, dynamic>> products = [
     {
-    'name': 'Habitaciones Dobles',
-    'image': 'assets/img/indiv.png',
-    'opcionSeleccionada': '1',
-    'description': 'Capacidad máxima para 3 personas, cuenta con cómodas camas, baño privado, televisión y Wi-Fi gratuito.',
-    'price' : 30.0, // Asegúrate de que sea un double
-    'status': 'Disponible',
-  },
-  
-  {
-    'name': 'Habitaciones Triples',
-    'image': 'assets/img/camatv.png',
-    'opcionSeleccionada': '2',
-    'description': 'Habitación especial para 4 personas, cuenta con cómodas camas, baño privado, televisión y Wi-Fi gratuito.',
-    'price' : 60.0, // Asegúrate de que sea un double
-    'status': 'Disponible',
-  },
-
-  {
-    'name': 'Departamento',
-    'image': 'assets/img/doble.png',
-    'opcionSeleccionada': '3',
-    'description': 'Departamentos amoblados, ideal para grupos de amigos o familias. Con cómodas camas, baño privado, televisión y Wi-Fi.', 
-    'price' : 400.0, // Asegúrate de que sea un double
-    'status': 'Disponible',
-  },
+      'name': 'Habitaciones Dobles',
+      'image': 'assets/img/indiv.png',
+      'opcionSeleccionada': '1',
+      'description':
+          'Capacidad máxima para 3 personas, cuenta con cómodas camas, baño privado, televisión y Wi-Fi gratuito.',
+      'price': 30.0, // Asegúrate de que sea un double
+      'status': 'Disponible',
+    },
+    {
+      'name': 'Habitaciones Triples',
+      'image': 'assets/img/camatv.png',
+      'opcionSeleccionada': '2',
+      'description':
+          'Habitación especial para 4 personas, cuenta con cómodas camas, baño privado, televisión y Wi-Fi gratuito.',
+      'price': 60.0, // Asegúrate de que sea un double
+      'status': 'Disponible',
+    },
+    {
+      'name': 'Departamento',
+      'image': 'assets/img/doble.png',
+      'opcionSeleccionada': '3',
+      'description':
+          'Departamentos amoblados, ideal para grupos de amigos o familias. Con cómodas camas, baño privado, televisión y Wi-Fi.',
+      'price': 400.0, // Asegúrate de que sea un double
+      'status': 'Disponible',
+    },
   ];
 
   @override
@@ -119,17 +120,18 @@ class _ClientHomePageState extends State<ClientHomePage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 241, 200, 113),
       appBar: AppBar(
-  title: const Text(
-    'Hospedaje Purma Wasi',
-    style: TextStyle(
-      color: Color.fromARGB(255, 249, 248, 246), // Cambia el color del texto a marrón
-    ),
-  ),
-  backgroundColor: const Color.fromARGB(255, 225, 171, 99),
-  iconTheme: const IconThemeData(
-    color: Colors.white, // Cambia el color de los íconos a blanco
-  ),
-),
+        title: const Text(
+          'Hospedaje Purma Wasi',
+          style: TextStyle(
+            color: Color.fromARGB(
+                255, 249, 248, 246), // Cambia el color del texto a marrón
+          ),
+        ),
+        backgroundColor: const Color.fromARGB(255, 225, 171, 99),
+        iconTheme: const IconThemeData(
+          color: Colors.white, // Cambia el color de los íconos a blanco
+        ),
+      ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -236,8 +238,7 @@ class _ClientHomePageState extends State<ClientHomePage> {
                         descripcion: product['description']!,
                         opcionSeleccionada: product['opcionSeleccionada']!,
                         price: product['price'],
-                        status: product ['status']!,
-
+                        status: product['status']!,
                         onTap: () {
                           Navigator.push(
                             context,
@@ -246,8 +247,9 @@ class _ClientHomePageState extends State<ClientHomePage> {
                                 name: product['name']!,
                                 image: product['image']!,
                                 descripcion: product['description']!,
-                                opcionSeleccionada: product['opcionSeleccionada']!,
-                                price: product['price'],// Pasar el precio
+                                opcionSeleccionada:
+                                    product['opcionSeleccionada']!,
+                                price: product['price'], // Pasar el precio
                                 status: product['status']!, // Pasar el estado
                               ),
                             ),
@@ -284,13 +286,15 @@ class ReservaDetailScreen extends StatelessWidget {
     required this.status,
   });
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
           'Purma Wasi',
-          style: TextStyle(color: const Color.fromARGB(255, 250, 250, 249)), // Estableciendo el color del texto a marrón
+          style: TextStyle(
+              color: const Color.fromARGB(255, 250, 250,
+                  249)), // Estableciendo el color del texto a marrón
         ),
         backgroundColor: const Color.fromARGB(255, 225, 171, 99),
         leading: IconButton(
@@ -309,7 +313,8 @@ class ReservaDetailScreen extends StatelessWidget {
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start, // Alineación a la izquierda
+              crossAxisAlignment:
+                  CrossAxisAlignment.start, // Alineación a la izquierda
               children: [
                 const SizedBox(height: 20),
                 // Imagen
@@ -349,9 +354,11 @@ class ReservaDetailScreen extends StatelessWidget {
                     children: [
                       // Estado de la habitación
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                         decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 233, 156, 41), // Color de fondo
+                          color: const Color.fromARGB(
+                              255, 233, 156, 41), // Color de fondo
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
@@ -392,12 +399,16 @@ class ReservaDetailScreen extends StatelessWidget {
                         // Navega a la ventana de la reserva
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => ReservaPage()), // Asegúrate de que ReservaPage esté definida
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  ReservaPage()), // Asegúrate de que ReservaPage esté definida
                         );
                       },
                       child: Text(
                         'Elegir habitación',
-                        style: TextStyle(fontSize: 18, color: Colors.white), // Letra en blanco
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white), // Letra en blanco
                       ),
                     ),
                   ),
@@ -468,8 +479,7 @@ class ProductCard extends StatelessWidget {
                     Text(
                       descripcion, // Mostrar la descripción dinámica aquí
                       style: const TextStyle(
-                        color: Color.fromARGB(255, 15, 15, 15),
-                        fontSize: 14),
+                          color: Color.fromARGB(255, 15, 15, 15), fontSize: 14),
                       maxLines: 5, // Limitar las líneas si es necesario
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -480,7 +490,9 @@ class ProductCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
-                        color: status == 'Disponible' ? Colors.green : Colors.red, // Cambiar color según estado
+                        color: status == 'Disponible'
+                            ? Colors.green
+                            : Colors.red, // Cambiar color según estado
                       ),
                     ),
                   ],

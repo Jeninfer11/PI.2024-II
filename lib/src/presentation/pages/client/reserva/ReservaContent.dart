@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shopy_file_gp2/src/presentation/pages/client/pago/bloc/PagoPage.dart';
 import 'package:shopy_file_gp2/src/presentation/pages/client/reserva/bloc/ReservaBloc.dart';
 import 'package:shopy_file_gp2/src/presentation/pages/client/reserva/bloc/ReservaEvent.dart';
 import 'package:shopy_file_gp2/src/presentation/pages/client/reserva/bloc/ReservaState.dart';
@@ -26,7 +27,7 @@ class ReservaContent extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 225, 171, 99),
         leading: IconButton(
           icon: const Icon(
-            Icons.arrow_back,
+            Icons.arrow_back_ios,
             color: Colors.white, // Establece el color del ícono a blanco
           ),
           onPressed: () {
@@ -110,12 +111,13 @@ class ReservaContent extends StatelessWidget {
   }
 
   Widget _DropdownIdentidad() {
+    // Valor inicial de la identidad seleccionada
     String? _selectedIdentidad = state.identidad.value.isNotEmpty
         ? state.identidad.value
         : 'DNI'; // Valor inicial
 
-    final TextEditingController _controller =
-        TextEditingController(); // Controlador para el campo de identidad
+    // Controlador para el campo de texto de identidad
+    final TextEditingController _controller = TextEditingController();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,8 +130,7 @@ class ReservaContent extends StatelessWidget {
               icon: Icon(Icons.format_indent_decrease_rounded,
                   color: Colors.white), // Icono en blanco
               labelStyle: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16), // Tamaño de fuente uniforme
+                  color: Colors.white, fontSize: 16), // Tamaño uniforme
               enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(
                     color: Colors.white,
@@ -156,12 +157,16 @@ class ReservaContent extends StatelessWidget {
                         color: Colors.white)), // Texto en blanco
               );
             }).toList(),
-            onChanged: (newValue) {
-              _selectedIdentidad = newValue;
-              bloc?.add(
-                identidadChanged(
-                    identidad: BlocFormItem(value: newValue ?? 'DNI')),
-              );
+            onChanged: (String? newValue) {
+              if (newValue != null) {
+                // Actualiza el valor seleccionado
+                _selectedIdentidad = newValue;
+                bloc?.add(
+                  identidadChanged(
+                      identidad:
+                          BlocFormItem(value: newValue)), // Usa newValue aquí
+                );
+              }
             },
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -212,9 +217,10 @@ class ReservaContent extends StatelessWidget {
             return null;
           },
           onChanged: (value) {
-            // Actualizar el estado con el valor ingresado
             bloc?.add(
-              identidadChanged(identidad: BlocFormItem(value: value)),
+              identidadChanged(
+                  identidad: BlocFormItem(
+                      value: value)), // Actualiza el valor ingresado
             );
           },
         ),
@@ -277,7 +283,6 @@ class ReservaContent extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 16),
-        
 
         // Selector de Cantidad de Huéspedes
         Container(
@@ -503,7 +508,7 @@ class ReservaContent extends StatelessWidget {
     );
   }
 
-  // Implementación del campo para Desayunos
+// Implementación del campo para Desayunos
   Widget _RadioDesayunos(BuildContext context) {
     String _selectedDesayunos = 'No'; // Valor inicial
 
@@ -512,31 +517,39 @@ class ReservaContent extends StatelessWidget {
       children: [
         const Text('Desayunos',
             style: TextStyle(color: Colors.white, fontSize: 16)),
-        RadioListTile<String>(
-          title: const Text('Sí', style: TextStyle(color: Colors.white)),
-          value: 'Sí',
-          groupValue: _selectedDesayunos,
-          activeColor: Colors.orange,
-          onChanged: (newValue) {
-            _selectedDesayunos = newValue!;
-            if (newValue == 'Sí') {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        ServicioPage()), // Lleva a la página de Desayunos
-              );
-            }
-          },
-        ),
-        RadioListTile<String>(
-          title: const Text('No', style: TextStyle(color: Colors.white)),
-          value: 'No',
-          groupValue: _selectedDesayunos,
-          activeColor: Colors.orange,
-          onChanged: (newValue) {
-            _selectedDesayunos = newValue!;
-          },
+        Row(
+          children: [
+            Expanded(
+              child: RadioListTile<String>(
+                title: const Text('Sí', style: TextStyle(color: Colors.white)),
+                value: 'Sí',
+                groupValue: _selectedDesayunos,
+                activeColor: Colors.orange,
+                onChanged: (newValue) {
+                  _selectedDesayunos = newValue!;
+                  if (newValue == 'Sí') {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ServicioPage()), // Lleva a la página de Desayunos
+                    );
+                  }
+                },
+              ),
+            ),
+            Expanded(
+              child: RadioListTile<String>(
+                title: const Text('No', style: TextStyle(color: Colors.white)),
+                value: 'No',
+                groupValue: _selectedDesayunos,
+                activeColor: Colors.orange,
+                onChanged: (newValue) {
+                  _selectedDesayunos = newValue!;
+                },
+              ),
+            ),
+          ],
         ),
       ],
     );
@@ -551,31 +564,39 @@ class ReservaContent extends StatelessWidget {
       children: [
         const Text('Servicios Adicionales',
             style: TextStyle(color: Colors.white, fontSize: 16)),
-        RadioListTile<String>(
-          title: const Text('Sí', style: TextStyle(color: Colors.white)),
-          value: 'Sí',
-          groupValue: _selectedServicios,
-          activeColor: Colors.orange,
-          onChanged: (newValue) {
-            _selectedServicios = newValue!;
-            if (newValue == 'Sí') {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        ClientHomeServicioPage()), // Lleva a la página de Servicios Adicionales
-              );
-            }
-          },
-        ),
-        RadioListTile<String>(
-          title: const Text('No', style: TextStyle(color: Colors.white)),
-          value: 'No',
-          groupValue: _selectedServicios,
-          activeColor: Colors.orange,
-          onChanged: (newValue) {
-            _selectedServicios = newValue!;
-          },
+        Row(
+          children: [
+            Expanded(
+              child: RadioListTile<String>(
+                title: const Text('Sí', style: TextStyle(color: Colors.white)),
+                value: 'Sí',
+                groupValue: _selectedServicios,
+                activeColor: Colors.orange,
+                onChanged: (newValue) {
+                  _selectedServicios = newValue!;
+                  if (newValue == 'Sí') {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ClientHomeServicioPage()), // Lleva a la página de Servicios Adicionales
+                    );
+                  }
+                },
+              ),
+            ),
+            Expanded(
+              child: RadioListTile<String>(
+                title: const Text('No', style: TextStyle(color: Colors.white)),
+                value: 'No',
+                groupValue: _selectedServicios,
+                activeColor: Colors.orange,
+                onChanged: (newValue) {
+                  _selectedServicios = newValue!;
+                },
+              ),
+            ),
+          ],
         ),
       ],
     );
@@ -589,6 +610,12 @@ class ReservaContent extends StatelessWidget {
         onPressed: () {
           if (state.formKey!.currentState!.validate()) {
             bloc?.add(ReservaSubmit());
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      PagoPage()), // Lleva a la página de pagos
+            );
           } else {
             Fluttertoast.showToast(
               msg: 'Reserva no confirmada',

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 class DefaultIconBack extends StatelessWidget {
   final double left;
- final double top;
+  final double top;
 
   DefaultIconBack({
     required this.left,
@@ -13,14 +14,14 @@ class DefaultIconBack extends StatelessWidget {
       alignment: Alignment.topLeft,
       margin: EdgeInsets.only(left: left, top: top),
       child: IconButton(
-        onPressed: (){
-          Navigator.pop(context);
-        },
-        icon: Icon(
-          Icons.arrow_back_ios,
-          size: 30,
-          color: Colors.white,
-        )),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios,
+            size: 30,
+            color: Colors.white,
+          )),
     );
   }
 }

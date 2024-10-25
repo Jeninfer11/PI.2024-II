@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopy_file_gp2/src/presentation/pages/auth/login/LoginPage.dart';
+import 'package:shopy_file_gp2/src/presentation/pages/client/reserva/ReservaPage.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Sobrenosotros extends StatelessWidget {
@@ -11,6 +12,15 @@ class Sobrenosotros extends StatelessWidget {
       appBar: AppBar(
         title: Text('Sobre Nosotros'),
         backgroundColor: const Color.fromARGB(255, 225, 171, 99),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white, // Estableciendo el color del ícono a blanco
+          ),
+          onPressed: () {
+            Navigator.pop(context); // Volver a la pantalla principal
+          },
+        ),
       ),
       drawer: Drawer(
         child: ListView(
@@ -30,25 +40,39 @@ class Sobrenosotros extends StatelessWidget {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.home),
+              leading: const Icon(Icons.home),
               iconColor: const Color.fromARGB(255, 230, 181, 125),
-              title: Text('Inicio'),
+              title: const Text('Inicio'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: Icon(Icons.info_outline),
+              leading: const Icon(Icons.house_siding_outlined),
               iconColor: const Color.fromARGB(255, 230, 181, 125),
-              title: Text('Sobre Nosotros'),
+              title: const Text('Reservas'),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ReservaPage()),
+                );
               },
             ),
             ListTile(
-              leading: Icon(Icons.logout),
+              leading: const Icon(Icons.info_outline),
               iconColor: const Color.fromARGB(255, 230, 181, 125),
-              title: Text('Cerrar Sesión'),
+              title: const Text('Sobre Nosotros'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Sobrenosotros()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.logout),
+              iconColor: const Color.fromARGB(255, 230, 181, 125),
+              title: const Text('Cerrar Sesion'),
               onTap: () {
                 Navigator.push(
                   context,

@@ -50,12 +50,7 @@ class ServicioBloc extends Bloc<ServicioEvent, ServicioState> {
 
   Future<void> _onInitEventServicio(
       InitEventServicio event, Emitter<ServicioState> emit) async {
-    AuthResponse? authResponse = await authUseCases.getUserSession.run();
     emit(state.copyWith(formKey: formKey));
-    print('Usuario en sesión: ${authResponse?.toJson()}');
-    if (authResponse != null) {
-      emit(state.copyWith(response: Success(authResponse), formKey: formKey));
-    }
   }
 
   Future<void> _onnombreChanged(

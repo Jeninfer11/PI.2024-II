@@ -299,7 +299,7 @@ class ReservaDetailScreen extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 225, 171, 99),
         leading: IconButton(
           icon: const Icon(
-            Icons.arrow_back,
+            Icons.arrow_back_ios,
             color: Colors.white, // Estableciendo el color del ícono a blanco
           ),
           onPressed: () {

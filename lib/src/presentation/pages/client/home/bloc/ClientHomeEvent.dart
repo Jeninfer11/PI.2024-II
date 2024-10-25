@@ -25,3 +25,6 @@ class Reserva extends ClientHomeEvent {
 class Servicio extends ClientHomeEvent {
   const Servicio();
 }
+class Pago extends ClientHomeEvent {
+  const Pago();
+}

@@ -47,6 +47,11 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<Resource<AuthResponse>> pago(Pago pago) {
+    return authServices.pago(pago);
+  }
+
+  @override
   Future<void> saveUserSession(AuthResponse authResponse) {
     // TODO: implement saveUserSession
     throw UnimplementedError();

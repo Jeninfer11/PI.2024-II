@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path/path.dart';
 import 'package:shopy_file_gp2/src/presentation/pages/client/reserva/ReservaPage.dart';
-import 'package:shopy_file_gp2/src/presentation/pages/client/reserva/bloc/ReservaEvent.dart';
 import 'package:shopy_file_gp2/src/presentation/pages/client/servicio/bloc/ServicioBloc.dart';
 import 'package:shopy_file_gp2/src/presentation/pages/client/servicio/bloc/ServicioEvent.dart';
 import 'package:shopy_file_gp2/src/presentation/pages/client/servicio/bloc/ServicioState.dart';
@@ -28,7 +27,7 @@ class ServicioContent extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 225, 171, 99),
         leading: IconButton(
           icon: const Icon(
-            Icons.arrow_back,
+            Icons.arrow_back_ios,
             color: Colors.white,
           ),
           onPressed: () {
@@ -78,7 +77,6 @@ class ServicioContent extends StatelessWidget {
                       _numeroPersona(context),
                       _TextFieldFechaInicio(context),
                       _TextFieldFechaFin(context),
-                      _TextFieldDiaServicio(context),
                       _buttonConfirmarServicio(context),
                     ],
                   ),
@@ -167,47 +165,6 @@ class ServicioContent extends StatelessWidget {
             },
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _TextFieldDiaServicio(BuildContext context) {
-    final TextEditingController _dateController = TextEditingController(
-      text: state.fechaInicio.value,
-    );
-
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10.0),
-      child: TextFormField(
-        controller: _dateController,
-        decoration: const InputDecoration(
-          labelText: 'Fecha dia de servicio',
-          icon: Icon(Icons.date_range, color: Colors.white),
-          labelStyle: TextStyle(color: Colors.white, fontSize: 16),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white, width: 2.0),
-          ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white, width: 2.0),
-          ),
-        ),
-        readOnly: true,
-        onTap: () async {
-          DateTime? pickedDate = await showDatePicker(
-            context: context,
-            initialDate: DateTime.now(),
-            firstDate: DateTime(2000),
-            lastDate: DateTime(2101),
-          );
-
-          if (pickedDate != null) {
-            String formattedDate =
-                "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
-            _dateController.text = formattedDate;
-            bloc?.add(FechaInicioChanged(
-                fechaInicio: BlocFormItem(value: formattedDate)));
-          }
-        },
       ),
     );
   }

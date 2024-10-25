@@ -28,7 +28,6 @@ class _ClientHomeServicioPageState extends State<ClientHomeServicioPage> {
   Widget build(BuildContext context) {
     _bloc = BlocProvider.of<ClientHomeBloc>(context);
 
-   
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 242, 222, 186),
       appBar: AppBar(
@@ -39,12 +38,11 @@ class _ClientHomeServicioPageState extends State<ClientHomeServicioPage> {
             fontWeight: FontWeight.bold,
             fontSize: 22,
           ),
-          
         ),
         backgroundColor: const Color.fromARGB(255, 210, 176, 131),
-          leading: IconButton(
+        leading: IconButton(
           icon: const Icon(
-            Icons.arrow_back,
+            Icons.arrow_back_ios,
             color: Colors.white, // Estableciendo el color del ícono a blanco
           ),
           onPressed: () {
@@ -53,13 +51,10 @@ class _ClientHomeServicioPageState extends State<ClientHomeServicioPage> {
         ),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      
-      
       body: BlocBuilder<ClientHomeBloc, ClientHomeState>(
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.all(12.0),
-            
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -113,7 +108,6 @@ class _ClientHomeServicioPageState extends State<ClientHomeServicioPage> {
   }
 }
 
-
 // Card para servicios
 class ServiceCard extends StatelessWidget {
   final String name;
@@ -161,37 +155,37 @@ class ServiceCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                   // Botón de elegir habitación
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: SizedBox(
-                    width: 200, // Cambia el ancho a un valor específico
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.brown[700], // Color del botón
-                        padding: EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                  // Botón de elegir habitación
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: SizedBox(
+                      width: 200, // Cambia el ancho a un valor específico
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.brown[700], // Color del botón
+                          padding: EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                         ),
-                      ),
-                      onPressed: () {
-                        // Navega a la ventana de la reserva
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  ReservaPage()), // Asegúrate de que ReservaPage esté definida
-                        );
-                      },
-                      child: Text(
-                        'Elegir servicio',
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white), // Letra en blanco
+                        onPressed: () {
+                          // Navega a la ventana de la reserva
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ReservaPage()), // Asegúrate de que ReservaPage esté definida
+                          );
+                        },
+                        child: Text(
+                          'Elegir servicio',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white), // Letra en blanco
+                        ),
                       ),
                     ),
                   ),
-                ),
                 ],
               ),
             ),
